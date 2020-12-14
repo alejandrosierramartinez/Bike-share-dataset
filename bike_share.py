@@ -20,3 +20,13 @@ print(bikes['member_gender'].isnull().sum()/bikes['member_gender'].count())
 #remove missing values
 bikes.dropna(inplace = True)
 print(bikes.isnull().sum())
+
+#check for unique values
+print(bikes.nunique())
+
+#member_birth_year exploration
+print(bikes['member_birth_year'].min())
+print(bikes['member_birth_year'].max())
+
+#member_gender exploration
+print(bikes['member_gender'].unique())
