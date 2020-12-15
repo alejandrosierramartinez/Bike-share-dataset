@@ -113,3 +113,14 @@ other_proportion = (bikes['member_gender'] == 'Other').sum()/bikes['member_gende
 print(male_proportion)
 print(female_proportion)
 print(other_proportion)
+
+#member age
+bins = np.arange(18, 80, 2)
+plt.hist(bikes['user_age'], bins = bins)
+plt.xlabel('Member age')
+plt.show()
+
+#bike id
+plt.hist(bikes['bike_id'])
+plt.xlabel('Bike id counts')
+plt.show()
