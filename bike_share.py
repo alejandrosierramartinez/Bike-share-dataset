@@ -71,9 +71,32 @@ plt.xticks([600, 1e3, 2e3, 5e3, 1e4, 2e4], [600, '1k', '2k', '5k', '10k', '20k']
 plt.xlabel('Ride duration log scale (s)')
 plt.show()
 
+
 #start_time
-#per year
+#expore variable
+year = bikes['start_time'].dt.year
+print(year.min())
+print(year.max())
 month = bikes['start_time'].dt.month
-plt.hist(month)
-plt.xlabel('Month')
+print(month.min())
+print(month.max())
+
+#per day
+bikes['day'] = bikes['start_time'].dt.day
+binsize = 1
+bins = np.arange(1, 28, binsize)
+plt.hist(data = bikes, x ='day', bins = bins)
+plt.xlabel('Rides per day')
+plt.show()
+
+#weekday
+bikes['weekday'] = bikes['start_time'].dt.day_name()
+bikes.groupby('weekday').count()['day'].sort_values(ascending=False).plot(kind='bar', fontsize=7, rot=0, width=0.9)
+plt.xlabel('Rides per weekday')
+plt.show()
+
+#hourly
+bikes['hour'] = bikes['start_time'].dt.hour
+bikes.groupby('hour').count()['day'].plot(kind='bar', rot=0, width=1)
+plt.xlabel('Rides per hour')
 plt.show()
