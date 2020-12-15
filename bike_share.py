@@ -100,3 +100,16 @@ bikes['hour'] = bikes['start_time'].dt.hour
 bikes.groupby('hour').count()['day'].plot(kind='bar', rot=0, width=1)
 plt.xlabel('Rides per hour')
 plt.show()
+
+#gender
+sb.countplot(data = bikes, x = 'member_gender', color = sb.color_palette()[0])
+plt.xlabel('Member gender')
+plt.show()
+
+#gender ratio
+male_proportion = (bikes['member_gender'] == 'Male').sum()/bikes['member_gender'].count()
+female_proportion = (bikes['member_gender'] == 'Female').sum()/bikes['member_gender'].count()
+other_proportion = (bikes['member_gender'] == 'Other').sum()/bikes['member_gender'].count()
+print(male_proportion)
+print(female_proportion)
+print(other_proportion)
