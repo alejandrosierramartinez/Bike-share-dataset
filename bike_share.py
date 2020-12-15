@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
+import datetime
 
 #load data
 bikes = pd.read_csv('201902-fordgobike-tripdata.csv')
@@ -30,3 +31,15 @@ print(bikes['member_birth_year'].max())
 
 #member_gender exploration
 print(bikes['member_gender'].unique())
+
+#convert start_time and end_time to datetype
+## year, month, etc can be accesed with df.dt.year
+bikes['start_time'] = pd.to_datetime(bikes.start_time, format = '%Y/%m/%d')
+bikes['end_time'] = pd.to_datetime(bikes.end_time, format = '%Y/%m/%d')
+
+#float to int
+bikes['start_station_id'] = bikes['start_station_id'].astype(int)
+bikes['end_station_id'] = bikes['end_station_id'].astype(int)
+bikes['member_birth_year'] = bikes['member_birth_year'].astype(int)
+
+print(bikes.head())
