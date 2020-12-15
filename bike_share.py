@@ -121,6 +121,19 @@ plt.xlabel('Member age')
 plt.show()
 
 #bike id
+print(bikes['bike_id'].nunique())
 plt.hist(bikes['bike_id'])
 plt.xlabel('Bike id counts')
 plt.show()
+
+#user type
+print(bikes['user_type'].unique())
+customer_proportion = (bikes['user_type'] == 'Customer').sum()/bikes['user_type'].count()
+suscriber_proportion = (bikes['user_type'] == 'Subscriber').sum()/bikes['user_type'].count()
+print(customer_proportion)
+print(suscriber_proportion)
+
+#bike share for all
+print(bikes['bike_share_for_all_trip'].unique())
+bike_share_for_all_trip_proportion = (bikes['bike_share_for_all_trip'] == 'Yes').sum()/bikes['bike_share_for_all_trip'].count()
+print(bike_share_for_all_trip_proportion)
