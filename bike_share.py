@@ -42,4 +42,6 @@ bikes['start_station_id'] = bikes['start_station_id'].astype(int)
 bikes['end_station_id'] = bikes['end_station_id'].astype(int)
 bikes['member_birth_year'] = bikes['member_birth_year'].astype(int)
 
-print(bikes.head())
+#descriptive statistics for variables of interest
+stats_col = ['duration_sec','member_birth_year']
+print(bikes[stats_col].describe())
