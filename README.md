@@ -9,7 +9,10 @@
 
 ## Summary of Findings
 
-> Summarize all of your findings from your exploration here, whether you plan on bringing them into your explanatory presentation or not.
+> Univariate exploration showed that male users are considerably higher than female. Also we could see that the users age is mainly from 28 to 35 years old.
+Bikes are mostly used between 7 and 9 am and in the afternoon between 16 to 19 hs. Also, bikes are used more on weekdays than on weekends.
+Generally, users are subscribed and 10% of the total rides are from the "bike share for all" kind.
+Finally, some bikes have considerably higher usage than others.
 
 
 ## Key Insights for Presentation
