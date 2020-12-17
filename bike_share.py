@@ -137,3 +137,13 @@ print(suscriber_proportion)
 print(bikes['bike_share_for_all_trip'].unique())
 bike_share_for_all_trip_proportion = (bikes['bike_share_for_all_trip'] == 'Yes').sum()/bikes['bike_share_for_all_trip'].count()
 print(bike_share_for_all_trip_proportion)
+
+
+#bivariate exploration
+#correlation matrix
+#numeric_vars = ['duration_sec', 'start_time', 'end_time', 'start_station_latitude', 'start_station_longitude', 'end_station_latitude', 'end_station_longitude', 'user_age']
+#categoric_vars = ['start_station_id', 'start_station_name', 'end_station_id', 'end_station_name', 'bike_id', 'member_gender', 'bike_share_for_all_trip', 'user_type']
+
+#corr plot
+corr_coef = np.corrcoef(bikes['duration_sec'],bikes['user_age'])
+print(corr_coef)
