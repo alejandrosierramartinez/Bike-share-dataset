@@ -165,9 +165,23 @@ plt.xlabel('Duration by User Age')
 plt.ylabel('Duration in seconds')
 plt.show()
 
+#violin plot
 bikes['duration_log'] = np.log10(bikes['duration_sec'])
 sb.violinplot(x="qbin", y='duration_log', data=bikes, showfliers=False, color = base_color)
 plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set text labels.
 plt.xlabel('Duration by User Age')
 plt.ylabel('Duration in seconds log scale')
+plt.show()
+
+#duration by weekday or weekend
+#create column is weekend with 1 as true 0 as false
+bikes['weekday'] = pd.to_datetime(bikes['start_time']).dt.dayofweek  # monday = 0, sunday = 6
+bikes['is_weekend'] = 0          # Initialize the column with default value of 0
+bikes.loc[bikes['weekday'].isin([5, 6]), 'is_weekend'] = 1  # 5 and 6 correspond to Sat and Sun
+
+# plot grouped by weekday or weekend
+sb.boxplot(y='duration_sec', x='is_weekend', data=bikes, showfliers=False, color = base_color);
+plt.xticks(np.arange(2), ['Weekday', 'Weekend'])  # Set text labels.
+plt.xlabel('Duration by Weekday or Weekend')
+plt.ylabel('Duration in seconds')
 plt.show()
