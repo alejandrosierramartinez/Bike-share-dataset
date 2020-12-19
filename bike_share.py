@@ -150,10 +150,17 @@ print(bikes.groupby('user_type').duration_sec.mean())
 print(bikes.groupby('user_type').duration_sec.count().Customer/(bikes.groupby('user_type').duration_sec.count().Customer + bikes.groupby('user_type').duration_sec.count().Subscriber))
 print(bikes.groupby('user_type').duration_sec.count().Subscriber/(bikes.groupby('user_type').duration_sec.count().Customer + bikes.groupby('user_type').duration_sec.count().Subscriber))
 
-#plot duration by user type violin
-bikes['duration_log'] = np.log10(bikes['duration_sec'])
+#plot duration by user type box
 base_color = sb.color_palette()[0]
-ax = sb.violinplot(x='user_type', y='duration_log', data=bikes, color = base_color)
+sb.boxplot(y='duration_sec', x='user_type', data=bikes, showfliers=False, color = base_color);
 plt.xlabel('Duration by User Type')
-plt.ylabel('Duration log scale')
+plt.ylabel('Duration in seconds')
+plt.show()
+
+#duration by age
+bikes['qbin'] = pd.qcut(bikes['user_age'], 5)
+sb.boxplot(x="qbin", y='duration_sec', data=bikes, showfliers=False, color = base_color)
+plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set text labels.
+plt.xlabel('Duration by User Age')
+plt.ylabel('Duration in seconds')
 plt.show()
