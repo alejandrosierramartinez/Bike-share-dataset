@@ -236,3 +236,13 @@ ax = plt.subplot(2, 1, 2)
 sb.countplot(data = bikes, x = 'member_gender', hue = 'user_type', palette = 'Blues')
 plt.xlabel('User type by gender')
 plt.show()
+
+#subscription by station
+#count rides
+#filter by subscribers from sample
+bikes_subs = bikes_samp.query('user_type == "Subscriber"')
+plt.scatter(bikes_subs['start_station_latitude'], bikes_subs['start_station_longitude'], alpha=0.01)
+plt.title('Bike subscriptors location')
+plt.xlabel('Station latitude')
+plt.ylabel('Station longitude')
+plt.show()
