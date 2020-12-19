@@ -185,3 +185,13 @@ plt.xticks(np.arange(2), ['Weekday', 'Weekend'])  # Set text labels.
 plt.xlabel('Duration by Weekday or Weekend')
 plt.ylabel('Duration in seconds')
 plt.show()
+
+#duration by morning, afternoon and night
+hour_bins = [0, 6, 12, 18, 24]
+labels = ['00:00-05:59', '06:00-11:59', '12:00-17:59', '18:00-23:59']
+bikes['hour_bin'] = pd.cut(bikes.start_time.dt.hour, hour_bins, labels=labels, right=False)
+
+sb.boxplot(y='duration_sec', x='hour_bin', data=bikes, showfliers=False, color = base_color);
+plt.xlabel('Duration by hour')
+plt.ylabel('Duration in seconds')
+plt.show()
