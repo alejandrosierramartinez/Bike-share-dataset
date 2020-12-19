@@ -140,10 +140,20 @@ print(bike_share_for_all_trip_proportion)
 
 
 #bivariate exploration
-#correlation matrix
-#numeric_vars = ['duration_sec', 'start_time', 'end_time', 'start_station_latitude', 'start_station_longitude', 'end_station_latitude', 'end_station_longitude', 'user_age']
-#categoric_vars = ['start_station_id', 'start_station_name', 'end_station_id', 'end_station_name', 'bike_id', 'member_gender', 'bike_share_for_all_trip', 'user_type']
-
-#corr plot
+#corr coef
 corr_coef = np.corrcoef(bikes['duration_sec'],bikes['user_age'])
 print(corr_coef)
+
+#rides by user
+print(bikes.groupby('user_type').duration_sec.count())
+print(bikes.groupby('user_type').duration_sec.mean())
+print(bikes.groupby('user_type').duration_sec.count().Customer/(bikes.groupby('user_type').duration_sec.count().Customer + bikes.groupby('user_type').duration_sec.count().Subscriber))
+print(bikes.groupby('user_type').duration_sec.count().Subscriber/(bikes.groupby('user_type').duration_sec.count().Customer + bikes.groupby('user_type').duration_sec.count().Subscriber))
+
+#plot duration by user type violin
+bikes['duration_log'] = np.log10(bikes['duration_sec'])
+base_color = sb.color_palette()[0]
+ax = sb.violinplot(x='user_type', y='duration_log', data=bikes, color = base_color)
+plt.xlabel('Duration by User Type')
+plt.ylabel('Duration log scale')
+plt.show()
