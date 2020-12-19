@@ -225,3 +225,14 @@ plt.title('Bike share for all trip location')
 plt.xlabel('Station latitude')
 plt.ylabel('Station longitude')
 plt.show()
+
+#subscription by age and gender
+plt.figure(figsize = [12, 12])
+plt.subplot(2, 1, 1)
+sb.countplot(data = bikes, x = 'qbin', hue = 'user_type', palette = 'Blues')
+plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set text labels.
+plt.xlabel('User type by age')
+ax = plt.subplot(2, 1, 2)
+sb.countplot(data = bikes, x = 'member_gender', hue = 'user_type', palette = 'Blues')
+plt.xlabel('User type by gender')
+plt.show()
