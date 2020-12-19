@@ -152,7 +152,7 @@ print(bikes.groupby('user_type').duration_sec.count().Subscriber/(bikes.groupby(
 
 #plot duration by user type box
 base_color = sb.color_palette()[0]
-sb.boxplot(y='duration_sec', x='user_type', data=bikes, showfliers=False, color = base_color);
+sb.boxplot(y='duration_sec', x='user_type', data=bikes, showfliers=False, color = base_color)
 plt.xlabel('Duration by User Type')
 plt.ylabel('Duration in seconds')
 plt.show()
@@ -180,7 +180,7 @@ bikes['is_weekend'] = 0          # Initialize the column with default value of 0
 bikes.loc[bikes['weekday'].isin([5, 6]), 'is_weekend'] = 1  # 5 and 6 correspond to Sat and Sun
 
 # plot grouped by weekday or weekend
-sb.boxplot(y='duration_sec', x='is_weekend', data=bikes, showfliers=False, color = base_color);
+sb.boxplot(y='duration_sec', x='is_weekend', data=bikes, showfliers=False, color = base_color)
 plt.xticks(np.arange(2), ['Weekday', 'Weekend'])  # Set text labels.
 plt.xlabel('Duration by Weekday or Weekend')
 plt.ylabel('Duration in seconds')
@@ -191,7 +191,27 @@ hour_bins = [0, 6, 12, 18, 24]
 labels = ['00:00-05:59', '06:00-11:59', '12:00-17:59', '18:00-23:59']
 bikes['hour_bin'] = pd.cut(bikes.start_time.dt.hour, hour_bins, labels=labels, right=False)
 
-sb.boxplot(y='duration_sec', x='hour_bin', data=bikes, showfliers=False, color = base_color);
+sb.boxplot(y='duration_sec', x='hour_bin', data=bikes, showfliers=False, color = base_color)
 plt.xlabel('Duration by hour')
 plt.ylabel('Duration in seconds')
+plt.show()
+
+#rides by station
+#Take 500 observation as sample
+samples = np.random.choice(bikes.shape[0], 5000, replace = False)
+bikes_samp = bikes.loc[bikes.index.intersection(samples),:]
+
+#count rides
+plt.scatter(bikes_samp['start_station_latitude'], bikes_samp['start_station_longitude'], alpha=0.005)
+plt.title('Rides by station')
+plt.xlabel('Station latitude')
+plt.ylabel('Station longitude')
+plt.show()
+
+#duration rides
+bikes_samp['scaled_duration'] = bikes['duration_sec']*0.0005
+plt.scatter(bikes_samp['start_station_latitude'], bikes_samp['start_station_longitude'], s = bikes_samp['scaled_duration'])
+plt.title('Duration by station location')
+plt.xlabel('Station latitude')
+plt.ylabel('Station longitude')
 plt.show()
