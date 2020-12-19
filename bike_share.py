@@ -164,3 +164,10 @@ plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set te
 plt.xlabel('Duration by User Age')
 plt.ylabel('Duration in seconds')
 plt.show()
+
+bikes['duration_log'] = np.log10(bikes['duration_sec'])
+sb.violinplot(x="qbin", y='duration_log', data=bikes, showfliers=False, color = base_color)
+plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set text labels.
+plt.xlabel('Duration by User Age')
+plt.ylabel('Duration in seconds log scale')
+plt.show()
