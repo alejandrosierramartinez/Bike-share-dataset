@@ -102,7 +102,8 @@ plt.xlabel('Rides per hour')
 plt.show()
 
 #gender
-sb.countplot(data = bikes, x = 'member_gender', color = sb.color_palette()[0])
+bikes.groupby('member_gender').count()['day'].sort_values(ascending=False).plot(kind='bar', fontsize=7, rot=0, width=0.5)
+#sb.countplot(data = bikes, x = 'member_gender', color = sb.color_palette()[0], set_width=1)
 plt.xlabel('Member gender')
 plt.show()
 
@@ -152,14 +153,14 @@ print(bikes.groupby('user_type').duration_sec.count().Subscriber/(bikes.groupby(
 
 #plot duration by user type box
 base_color = sb.color_palette()[0]
-sb.boxplot(y='duration_sec', x='user_type', data=bikes, showfliers=False, color = base_color)
+sb.boxplot(y='duration_sec', x='user_type', data=bikes, showfliers=False, color = base_color, width=0.3)
 plt.xlabel('Duration by User Type')
 plt.ylabel('Duration in seconds')
 plt.show()
 
 #duration by age
 bikes['qbin'] = pd.qcut(bikes['user_age'], 5)
-sb.boxplot(x="qbin", y='duration_sec', data=bikes, showfliers=False, color = base_color)
+sb.boxplot(x="qbin", y='duration_sec', data=bikes, showfliers=False, color = base_color, width=0.3)
 plt.xticks(np.arange(5), ['18-26', '27-30', '31-34', '35-41', '> 41'])  # Set text labels.
 plt.xlabel('Duration by User Age')
 plt.ylabel('Duration in seconds')
@@ -180,7 +181,7 @@ bikes['is_weekend'] = 0          # Initialize the column with default value of 0
 bikes.loc[bikes['weekday'].isin([5, 6]), 'is_weekend'] = 1  # 5 and 6 correspond to Sat and Sun
 
 # plot grouped by weekday or weekend
-sb.boxplot(y='duration_sec', x='is_weekend', data=bikes, showfliers=False, color = base_color)
+sb.boxplot(y='duration_sec', x='is_weekend', data=bikes, showfliers=False, color = base_color, width=0.3)
 plt.xticks(np.arange(2), ['Weekday', 'Weekend'])  # Set text labels.
 plt.xlabel('Duration by Weekday or Weekend')
 plt.ylabel('Duration in seconds')
@@ -191,7 +192,7 @@ hour_bins = [0, 6, 12, 18, 24]
 labels = ['00:00-05:59', '06:00-11:59', '12:00-17:59', '18:00-23:59']
 bikes['hour_bin'] = pd.cut(bikes.start_time.dt.hour, hour_bins, labels=labels, right=False)
 
-sb.boxplot(y='duration_sec', x='hour_bin', data=bikes, showfliers=False, color = base_color)
+sb.boxplot(y='duration_sec', x='hour_bin', data=bikes, showfliers=False, color = base_color, width=0.3)
 plt.xlabel('Duration by hour')
 plt.ylabel('Duration in seconds')
 plt.show()
