@@ -217,15 +217,6 @@ plt.xlabel('Station latitude')
 plt.ylabel('Station longitude')
 plt.show()
 
-#bike_share_for_all location
-#filter bike_share_for_all trips from sample
-bike_share_for_all = bikes_samp.query('bike_share_for_all_trip == "Yes"')
-plt.scatter(bike_share_for_all['start_station_latitude'], bike_share_for_all['start_station_longitude'], alpha=0.05)
-plt.title('Bike share for all trip location')
-plt.xlabel('Station latitude')
-plt.ylabel('Station longitude')
-plt.show()
-
 #subscription by age and gender
 plt.figure(figsize = [12, 12])
 plt.subplot(2, 1, 1)
@@ -245,4 +236,27 @@ plt.scatter(bikes_subs['start_station_latitude'], bikes_subs['start_station_long
 plt.title('Bike subscriptors location')
 plt.xlabel('Station latitude')
 plt.ylabel('Station longitude')
+plt.show()
+
+#bike_share_for_all location
+#filter bike_share_for_all trips from sample
+bike_share_for_all = bikes_samp.query('bike_share_for_all_trip == "Yes"')
+plt.scatter(bike_share_for_all['start_station_latitude'], bike_share_for_all['start_station_longitude'], alpha=0.05)
+plt.title('Bike share for all trip location')
+plt.xlabel('Station latitude')
+plt.ylabel('Station longitude')
+plt.show()
+
+#multivariate exploration
+#create column for subscription
+bikes.loc[bikes['bike_share_for_all_trip'].isin(['Yes']), 'user_type'] = 'Bike share for all'
+
+#duration across user type and weekday
+ax = sb.pointplot(data = bikes, hue = 'user_type', y = 'duration_sec', x = 'is_weekend',
+           palette = 'Blues', linestyles = '')
+plt.title('Duration by user type and weekday')
+plt.xticks(np.arange(2),['Weekday', 'Weekend'])
+plt.legend(frameon=False )
+plt.xlabel('Day of week')
+plt.ylabel('Duration in seconds')
 plt.show()
