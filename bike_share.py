@@ -260,3 +260,11 @@ plt.legend(frameon=False )
 plt.xlabel('Day of week')
 plt.ylabel('Duration in seconds')
 plt.show()
+
+#age by day of week and user type
+sb.boxplot(data=bikes, hue='user_type', y='user_age', x='is_weekend', palette = 'Blues', showfliers=False, width=0.5)
+plt.xticks(np.arange(2),['Weekday', 'Weekend'])
+plt.legend(frameon=False)
+plt.xlabel('User type')
+plt.ylabel('User age')
+plt.show()
